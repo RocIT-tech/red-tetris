@@ -12,7 +12,7 @@ $ npm run srv-dist
 or using docker-compose
 
 ```bash
-$ docker-compose up
+$ docker-compose -p tetris up
 ```
 
 You can now play in http://localhost:4433
