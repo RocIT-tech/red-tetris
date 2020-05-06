@@ -6,6 +6,7 @@ services:
         tty: true
         command: >
             bash -c "npm install &&
+                    ./node_modules/.bin/webpack &&
                      npm run srv-dev"
         container_name: 'tetris_node'
         working_dir: '/home/node/project'
