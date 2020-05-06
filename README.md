@@ -6,6 +6,7 @@ Full Stack TypeScript Multiplayer Tetris Game build with Node, Socket.io, React,
 
 ```bash
 $ npm install
+$ ./node_modules/.bin/webpack
 $ npm run srv-dist
 ```
 
