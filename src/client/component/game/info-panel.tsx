@@ -1,11 +1,10 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { IOptionGame } from '../../../common/ITypeRoomManager';
 import { useDispatch, useMappedState } from 'redux-react-hook';
 import { useCallback } from 'react';
 import { SEND_QUIT_ROOM, SEND_START_GAME, SEND_TOGGLE_OPTION_GAME } from '../../redux/actions/action-creators';
 import { IDataState } from '../../redux/reducer';
-
-const mp3 = require('../../assets/Original_Tetris_theme.mp3');
 
 const InfoPanel = () => {
 
@@ -41,6 +40,23 @@ const InfoPanel = () => {
   const onClickHome = () => {
     dispatch(SEND_QUIT_ROOM());
   };
+
+  const mp3: {[index: string]: any} = {
+    mp3_original: {
+      label: 'Original theme',
+      resource: require('../../assets/Original_Tetris_theme.mp3'),
+    },
+    mp3_denis: {
+      label: 'Denis Brogniart ah remix theme',
+      resource: require('../../assets/denis-brogniart-tetris-ah-version.mp3'),
+    },
+  };
+  const [ playingMp3, setPlayingMp3 ] = useState('mp3_original');
+
+  const mp3Options: JSX.Element[] = [];
+  for (const [key, item] of Object.entries(mp3)) {
+    mp3Options.push(<option value={key}>{item.label}</option>);
+  }
 
   return (
     <div className={'column width_info_panel spaceBetween'}>
@@ -97,7 +113,10 @@ const InfoPanel = () => {
       </div>
       <div className={'row'}>
         <div className={'column'}>
-          <audio controls={true} loop={true} autoPlay={true} src={mp3} className={'color0'}/>
+          <select onChange={(e) => setPlayingMp3(e.currentTarget.value)}>
+            {mp3Options}
+          </select>
+          <audio controls={true} loop={true} autoPlay={true} src={mp3[playingMp3].resource} className={'color0'}/>
         </div>
       </div>
     </div>
